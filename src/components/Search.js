@@ -5,15 +5,11 @@ import styled from 'styled-components';
 import { getLocation } from '../api/kakaoAPI';
 import { getSigungu } from '../api/medicalAPI';
 
-const { Search } = Input;
 const SearchWrap = styled.div`
   margin: 5px 0px;
 `;
 const SearchComponent = ({ currentAvailable, disease, changeMarkerList }) => {
   const [options, setOptions] = useState([]);
-  const handleSearch = value => {
-    setOptions(value);
-  };
   const onSearch = async value => {
     if (value.length > 0) {
       var result_public = await getLocation(value);
@@ -25,10 +21,6 @@ const SearchComponent = ({ currentAvailable, disease, changeMarkerList }) => {
           // 올바른 주소 입력 --> 서버로 데이터 보내기
           const sido = addressList[0];
           const sigungu = addressList[1];
-          console.log(sido);
-          console.log(sigungu);
-          console.log(currentAvailable);
-          console.log(disease);
           const result_node = await getSigungu(
             sido,
             sigungu,
@@ -40,26 +32,29 @@ const SearchComponent = ({ currentAvailable, disease, changeMarkerList }) => {
       }
     }
   };
-  const onChangeHandle = async e => {
-    const result_public = await getLocation(e.target.value);
-    var tmp = [];
+  const onChangeHandle = async value => {
+    const result_public = await getLocation(value);
+    let tmp = [];
     if (result_public.length > 0) {
       result_public.map(info => {
-        tmp.push(info.address_name);
+        tmp.push({ value: info.address_name });
       });
     }
-    handleSearch(tmp);
-    console.log(tmp);
+    setOptions(tmp);
   };
   return (
     <SearchWrap>
-      <Search
-        placeholder="위치 입력"
-        onSearch={onSearch}
-        onChange={onChangeHandle}
-        enterButton
-        style={{ width: '357px' }}
-      />
+      <AutoComplete
+        dropdownMatchSelectWidth={252}
+        style={{
+          width: 353,
+        }}
+        options={options}
+        onSelect={onSearch}
+        onSearch={onChangeHandle}
+      >
+        <Input.Search size="large" placeholder="지역 입력" enterButton />
+      </AutoComplete>
     </SearchWrap>
   );
 };
