@@ -1,11 +1,11 @@
-import { MedListItem } from "./MedListItem";
+import { MedListItem } from './MedListItem';
 
-export const MedList = () => {
+export const MedList = ({ medicals }) => {
   return (
     <div>
-      <MedListItem />
-      <MedListItem />
-      <MedListItem />
+      {medicals.map(medical => (
+        <MedListItem key={medical.hpid} data={medical} />
+      ))}
     </div>
   );
 };

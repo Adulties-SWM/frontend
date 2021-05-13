@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MedInfoModal } from './components/MedInfoModal';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Sidebar } from './components/Sidebar';
@@ -6,8 +6,10 @@ import Layout from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import Map from './components/Map/Map';
 import './App.css';
+import { getCurLocMedicals, getSigungu } from './api/medicalAPI';
 
 function App() {
+  const [currentTab, setCurrentTab] = useState('1');
   const [currentAvailable, setCurrentAvailable] = useState('open');
   const [disease, setDisease] = useState(null);
   const [maxDistance, setMaxDistance] = useState(null);
@@ -37,9 +39,46 @@ function App() {
       lon: 126.570738,
     },
   ]);
+  const [medicals, setMedicals] = useState([]);
   useEffect(() => {
-    //console.log(markerList);
-  }, [markerList]);
+    if (currentTab != 1) return;
+    navigator.geolocation.getCurrentPosition(position => {
+      getCurLocMedicals({
+        x: position.coords.longitude,
+        y: position.coords.latitude,
+        currentAvailable,
+        maxDistance,
+        disease,
+      }).then(({ hospitals }) => {
+        console.log(
+          'a',
+          {
+            x: position.coords.longitude,
+            y: position.coords.latitude,
+            currentAvailable,
+            maxDistance,
+            disease,
+          },
+          hospitals,
+        );
+        setMedicals(hospitals);
+        setMarkerList(
+          hospitals.map(hospital => ({
+            title: hospital.name,
+            content: `<div>${hospital.name}</div>`,
+            lat: hospital.y,
+            lon: hospital.x,
+          })),
+        );
+      });
+    });
+  }, [currentTab, currentAvailable, maxDistance, disease]);
+
+  useEffect(() => {
+    if (currentTab != 2) return;
+    //TODO: Sigungu?
+  }, [currentTab, currentAvailable, maxDistance, disease]);
+
   return (
     <>
       <Layout>
@@ -51,6 +90,8 @@ function App() {
             setDisease={setDisease}
             maxDistance={maxDistance}
             setMaxDistance={setMaxDistance}
+            medicals={medicals}
+            setCurrentTab={setCurrentTab}
           />
         </Sider>
         <Map markerList={markerList}></Map>
