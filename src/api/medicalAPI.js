@@ -27,6 +27,13 @@ export const getDetail = async hpid => {
 };
 
 export const getCurLocMedicals = async params => {
-  const { data } = await axios.get(`${url}/info/position`, { params });
-  return data;
+  try {
+    const ret = await axios.get(`${url}/info/position`, { params });
+    console.log(ret);
+    const { data } = ret;
+    return data;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 };

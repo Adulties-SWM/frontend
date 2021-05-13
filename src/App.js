@@ -44,8 +44,8 @@ function App() {
     if (currentTab != 1) return;
     navigator.geolocation.getCurrentPosition(position => {
       getCurLocMedicals({
-        x: position.coords.longitude,
-        y: position.coords.latitude,
+        lon: position.coords.longitude,
+        lat: position.coords.latitude,
         currentAvailable,
         maxDistance,
         disease,
@@ -53,8 +53,8 @@ function App() {
         console.log(
           'a',
           {
-            x: position.coords.longitude,
-            y: position.coords.latitude,
+            lon: position.coords.longitude, // 경도 = lon = x
+            lat: position.coords.latitude, // 위도 = latitude = y
             currentAvailable,
             maxDistance,
             disease,
@@ -66,8 +66,8 @@ function App() {
           hospitals.map(hospital => ({
             title: hospital.name,
             content: `<div>${hospital.name}</div>`,
-            lat: hospital.y,
-            lon: hospital.x,
+            lat: hospital.lat,
+            lon: hospital.lon,
           })),
         );
       });
