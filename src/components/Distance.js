@@ -16,7 +16,9 @@ const Distance = () => {
     <DistanceWrap>
       <StyledSelect onChange={handleChange} placeholder={'거리 선택'}>
         {list.map(item => (
-          <Option value={item}>{item}m</Option>
+          <Option value={item} key={item}>
+            {item}m
+          </Option>
         ))}
       </StyledSelect>
     </DistanceWrap>

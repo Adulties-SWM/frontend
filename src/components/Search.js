@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import { Input } from 'antd';
 import styled from 'styled-components';
@@ -11,7 +11,12 @@ const SearchComponent = () => {
   const onSearch = value => console.log(value);
   return (
     <SearchWrap>
-      <Search placeholder="위치 입력" onSearch={onSearch} enterButton style={{width: '335px'}}/>
+      <Search
+        placeholder="위치 입력"
+        onSearch={onSearch}
+        enterButton
+        style={{ width: '335px' }}
+      />
     </SearchWrap>
   );
 };

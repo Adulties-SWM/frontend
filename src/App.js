@@ -1,7 +1,6 @@
-import { MedInfoModal } from './components/MedInfoModal';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Sidebar } from './components/Sidebar';
-import Layout, { Content } from 'antd/lib/layout/layout';
+import Layout from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import React, { useEffect, useState } from 'react';
 import Map from './components/Map/Map';

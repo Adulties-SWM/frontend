@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { MedInfoModal } from '../MedInfoModal';
 
@@ -142,9 +142,9 @@ const Map = ({ markerList }) => {
     // 모달 호출
   }, [selectedMarker]);
 
-  const ModalToggle = () => {
+  const ModalToggle = useCallback(() => {
     setModalStatus(!modalStatus);
-  };
+  }, [modalStatus]);
 
   return (
     <MapContainer>
@@ -152,7 +152,7 @@ const Map = ({ markerList }) => {
       <MedInfoModal
         ModalToggle={ModalToggle}
         modalProps={{ visible: modalStatus }}
-        data={selectedMarker}
+        // data={selectedMarker}
       />
     </MapContainer>
   );
