@@ -5,7 +5,7 @@ export const MedList = ({ medicals }) => {
     <div
       style={{
         overflow: 'auto',
-        height: '100%',
+        height: 'calc(100vh - 230px)',
       }}
     >
       {medicals.map(medical => (
