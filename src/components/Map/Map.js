@@ -27,6 +27,7 @@ var markerSize = new kakao.maps.Size(MARKER_WIDTH, MARKER_HEIGHT), // 기본, �
 const Map = ({ markerList }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [usedMarkers, setUsedMarkers] = useState([]);
   // MakrerImage 객체를 생성하여 반환하는 함수입니다
   // function createMarkerImage(markerSize, offset, spriteOrigin) {
   //   var markerImage = new kakao.maps.MarkerImage(
@@ -63,7 +64,10 @@ const Map = ({ markerList }) => {
 
   useEffect(() => {
     if (!map) return;
-    markerList.forEach(_marker => {
+    if (usedMarkers && usedMarkers.length > 0) {
+      usedMarkers.forEach(m => m.setMap(null));
+    }
+    const newUsedMarkers = markerList.map(_marker => {
       const position = new kakao.maps.LatLng(_marker.lat, _marker.lon);
       const marker = new kakao.maps.Marker({ map, position });
       marker.hpid = _marker.hpid;
@@ -72,7 +76,9 @@ const Map = ({ markerList }) => {
       kakao.maps.event.addListener(marker, 'click', function () {
         setSelectedMarker(marker);
       });
+      return marker;
     });
+    setUsedMarkers(newUsedMarkers);
     /*
     positions.forEach((position, i) => {
       const gapX = MARKER_WIDTH + SPRITE_GAP;
