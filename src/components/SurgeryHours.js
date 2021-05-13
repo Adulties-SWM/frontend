@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import { Radio } from 'antd';
 import styled from 'styled-components';
@@ -13,13 +13,12 @@ const SurgeryHoursWrap = styled.a`
   margin-top: 5px;
 `;
 const options = [
-  { label: '현재진료가능', value: 'now' },
+  { label: '현재진료가능', value: 'open' },
   { label: '전체', value: 'all' },
 ];
-const SurgeryHours = () => {
-  const [value, setValue] = useState('now');
+const SurgeryHours = ({currentAvailable, setCurrentAvailable}) => {
   const onChange = e => {
-    setValue(e.target.value);
+    setCurrentAvailable(e.target.value);
   };
   return (
     <SurgeryHoursWrap>
@@ -27,7 +26,7 @@ const SurgeryHours = () => {
       <Radio.Group
         options={options}
         onChange={onChange}
-        value={value}
+        value={currentAvailable}
         optionType="button"
         buttonStyle="solid"
         style={{ fontSize: '12px' }}

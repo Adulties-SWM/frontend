@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import styled from 'styled-components';
@@ -9,14 +9,16 @@ const StyledSelect = styled(Select)`
 const DistanceWrap = styled.div`
   margin: 5px 0px;
 `;
-const Distance = () => {
-  const [list, setList] = useState([300, 500]);
-  const handleChange = value => {};
+const Distance = ({maxDistance, setMaxDistance}) => {
+  const options = [300, 500];
+  const handleChange = value => {
+    setMaxDistance(value)
+  };
   return (
     <DistanceWrap>
       <StyledSelect onChange={handleChange} placeholder={'거리 선택'}>
-        {list.map(item => (
-          <Option value={item}>{item}m</Option>
+        {options.map(item => (
+          <Option key={item} value={item}>{item}m</Option>
         ))}
       </StyledSelect>
     </DistanceWrap>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import { Tabs } from 'antd';
@@ -34,8 +34,14 @@ const StyledA = styled.a`
   font-size: 16px;
   font-weight: 700;
 `;
-const Tab = () => {
-  const [list, setList] = useState([300, 500]);
+const Tab = ({
+  currentAvailable,
+  setCurrentAvailable,
+  disease,
+  setDisease,
+  maxDistance,
+  setMaxDistance,
+}) => {
   const handleChange = key => {};
   return (
     <TabWrap>
@@ -46,12 +52,15 @@ const Tab = () => {
       >
         <TabPane tab="현재 위치" key="1">
           <StyledA>거리</StyledA>
-          <Distance />
-          <SurgeryHours />
-          <PatientState />
+          <Distance maxDistance={maxDistance} setMaxDistance={setMaxDistance} />
+          <SurgeryHours
+            currentAvailable={currentAvailable}
+            setCurrentAvailable={setCurrentAvailable}
+          />
+          <PatientState disease={disease} setDisease={setDisease} />
         </TabPane>
         <TabPane tab="장소 검색" key="2">
-        <StyledA>장소</StyledA>
+          <StyledA>장소</StyledA>
           <Search />
           <SurgeryHours />
           <PatientState />
