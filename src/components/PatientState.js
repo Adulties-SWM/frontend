@@ -17,8 +17,21 @@ const SurgeryHoursWrap = styled.a`
   margin-left: 10px;
   margin-top: 5px;
 `;
-const PatientState = ({disease, setDisease}) => {
-  const options = ['뇌출혈수술', '뇌경색의재관류', '심근경색의재관류', '복부손상의수술', '사지접합의수술', '응급내시경', '응급투석', '조산산모', '정신질환자', '신생아', '중증화상'];
+const PatientState = ({ disease, setDisease }) => {
+  const options = [
+    '응급실',
+    '뇌출혈수술',
+    '뇌경색의재관류',
+    '심근경색의재관류',
+    '복부손상의수술',
+    '사지접합의수술',
+    '응급내시경',
+    '응급투석',
+    '조산산모',
+    '정신질환자',
+    '신생아',
+    '중증화상',
+  ];
   const handleChange = value => {
     setDisease(value);
   };
@@ -27,7 +40,9 @@ const PatientState = ({disease, setDisease}) => {
       <StyledDiv>진단 항목</StyledDiv>
       <StyledSelect onChange={handleChange} placeholder={'진단 항목 선택'}>
         {options.map(item => (
-          <Option key={item} value={item}>{item}</Option>
+          <Option key={item} value={item}>
+            {item}
+          </Option>
         ))}
       </StyledSelect>
     </SurgeryHoursWrap>

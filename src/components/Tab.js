@@ -62,8 +62,11 @@ const Tab = ({
         <TabPane tab="장소 검색" key="2">
           <StyledA>장소</StyledA>
           <Search />
-          <SurgeryHours />
-          <PatientState />
+          <SurgeryHours
+            currentAvailable={currentAvailable}
+            setCurrentAvailable={setCurrentAvailable}
+          />
+          <PatientState disease={disease} setDisease={setDisease} />
         </TabPane>
       </StyledTab>
     </TabWrap>
