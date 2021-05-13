@@ -157,7 +157,7 @@ const Map = ({ markerList }) => {
       <MedInfoModal
         ModalToggle={ModalToggle}
         modalProps={{ visible: modalStatus }}
-        data={selectedMarker}
+        // data={selectedMarker}
       />
     </MapContainer>
   );

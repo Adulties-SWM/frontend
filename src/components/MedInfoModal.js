@@ -7,15 +7,15 @@ import React from 'react';
 export const MedInfoModal = ({
   modalProps,
   ModalToggle,
-  /*   data: {
-    name,
-    location,
-    phone,
-    bedNum,
-    hospitalRoomAvailable,
-    emergencyAvailable,
-    schedule,
-  }, */
+  data: {
+    name = '세브란스병원',
+    location = '서울특별시 강남구 일원동50 (일원로81)',
+    phone = '02-3410-2114',
+    bedNum = '1966',
+    hospitalRoomAvailable = true,
+    emergencyAvailable = true,
+    schedule = '',
+  } = {},
 }) => {
   return (
     <Modal
@@ -29,7 +29,7 @@ export const MedInfoModal = ({
         </Button>,
       ]}
     >
-      {/*  <Row style={{ marginBottom: '12px' }}>
+      <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>기관명</Text>
         </Col>
@@ -73,7 +73,7 @@ export const MedInfoModal = ({
           월(8:30~15:00) , 화(8:30~15:00), 수(8:30~15:00), 목(8:30~15:00)
           금(8:30~15:00), 토(8:30~15:00), 일(8:30~15:00), 공휴일(8:30~15:00)
         </Col>
-      </Row> */}
+      </Row>
     </Modal>
   );
 };
