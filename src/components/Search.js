@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Select } from 'antd';
-const { Option } = Select;
+import { Input } from 'antd';
+import styled from 'styled-components';
 
-const Search = () => {
-  const [list, setList] = useState([300, 500]);
-  const handleChange = value => {};
+const { Search } = Input;
+const SearchWrap = styled.div`
+  margin: 5px 0px;
+`;
+const SearchComponent = () => {
+  const onSearch = value => console.log(value);
   return (
-    <>
-      <Select style={{ width: 120 }} onChange={handleChange} placeholder={'거리 선택'}>
-        {list.map(item => (
-          <Option value={item}>{item}m</Option>
-        ))}
-      </Select>
-    </>
+    <SearchWrap>
+      <Search placeholder="위치 입력" onSearch={onSearch} enterButton style={{width: '335px'}}/>
+    </SearchWrap>
   );
 };
 
-export default Search;
+export default SearchComponent;

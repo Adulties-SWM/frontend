@@ -5,6 +5,7 @@ import { Tabs } from 'antd';
 import SurgeryHours from './SurgeryHours';
 import PatientState from './PatientState';
 import Distance from './Distance';
+import Search from './Search';
 
 const { TabPane } = Tabs;
 const TabWrap = styled.div`
@@ -33,7 +34,6 @@ const StyledA = styled.a`
   font-size: 16px;
   font-weight: 700;
 `;
-const ChangeWrap = styled.div``;
 const Tab = () => {
   const [list, setList] = useState([300, 500]);
   const handleChange = key => {};
@@ -45,14 +45,14 @@ const Tab = () => {
         tabBarStyle={{ color: '#ffffff' }}
       >
         <TabPane tab="현재 위치" key="1">
-          <StyledA>장소</StyledA>
+          <StyledA>거리</StyledA>
           <Distance />
           <SurgeryHours />
           <PatientState />
         </TabPane>
         <TabPane tab="장소 검색" key="2">
-        <StyledA>거리</StyledA>
-          <Distance />
+        <StyledA>장소</StyledA>
+          <Search />
           <SurgeryHours />
           <PatientState />
         </TabPane>
