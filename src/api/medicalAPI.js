@@ -19,7 +19,6 @@ export const getSigungu = async params => {
 export const getCurLocMedicals = async params => {
   try {
     const ret = await axios.get(`${url}/info/position`, { params });
-    console.log(ret);
     const { data } = ret;
     return data;
   } catch (e) {

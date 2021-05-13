@@ -50,24 +50,14 @@ function App() {
         maxDistance,
         disease,
       }).then(({ hospitals }) => {
-        console.log(
-          'a',
-          {
-            lon: position.coords.longitude, // 경도 = lon = x
-            lat: position.coords.latitude, // 위도 = latitude = y
-            currentAvailable,
-            maxDistance,
-            disease,
-          },
-          hospitals,
-        );
         setMedicals(hospitals);
         setMarkerList(
           hospitals.map(hospital => ({
             title: hospital.name,
             content: `<div>${hospital.name}</div>`,
-            lat: hospital.lat,
-            lon: hospital.lon,
+            lat: Number(hospital.lat),
+            lon: Number(hospital.lon),
+            hpid: hospital.hpid,
           })),
         );
       });

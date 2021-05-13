@@ -4,10 +4,9 @@ import Text from 'antd/lib/typography/Text';
 import React from 'react';
 
 //TODO: get dataProps
-export const MedInfoModal = ({
-  modalProps,
-  ModalToggle,
-  data: {
+export const MedInfoModal = ({ modalProps, ModalToggle, data }) => {
+  console.log(data);
+  const {
     name = '세브란스병원',
     location = '서울특별시 강남구 일원동50 (일원로81)',
     phone = '02-3410-2114',
@@ -15,8 +14,7 @@ export const MedInfoModal = ({
     hospitalRoomAvailable = true,
     emergencyAvailable = true,
     schedule = '',
-  } = {},
-}) => {
+  } = {};
   return (
     <Modal
       {...modalProps}
