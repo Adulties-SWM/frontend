@@ -12,4 +12,15 @@ const getSigungu = async (sido, sigungu) => {
     return e;
   }
 };
-export { getSigungu };
+const getDetail = async (hpid) => {
+  try {
+    const { data } = await axios.get(`${url}/detail?hpid=${hpid})`);
+    console.log('[SUCCESS] GET SIGUNGU', data);
+    return data.documents[0].address_name;
+  } catch (e) {
+    console.log("여기오는거야?", e);
+    console.error('[FAIL] GET SIGUNGU', e);
+    return e;
+  }
+};
+export { getSigungu, getDetail };
