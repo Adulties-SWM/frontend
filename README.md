@@ -27,10 +27,29 @@
 
   *병원 정보엔 병상 수, 입원실 및 응급실 가용 여부가 포함돼 있습니다.
 
-  
-
 ## 화면구성
 
+## 개발환경
+groom IDE환경에서 node.js, express, react로 개발했습니다. 
+- front-end 사용 라이브러리 
+  ```
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.15.5",
+    "axios": "^0.21.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "styled-components": "^5.3.0",
+    "web-vitals": "^1.0.1"
+  ```
+## 실행 방법
+- front-end 실행 방법
+  ```
+  $ yarn
+  $ yarn start
+  ```
 ## 팀원소개
 
 - Front  End
@@ -41,3 +60,5 @@
   - 김가영
   - 박찬규
   - 이선노 
+
+
