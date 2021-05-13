@@ -41,6 +41,7 @@ const Tab = ({
   setDisease,
   maxDistance,
   setMaxDistance,
+  changeMarkerList,
 }) => {
   const handleChange = key => {};
   return (
@@ -61,7 +62,11 @@ const Tab = ({
         </TabPane>
         <TabPane tab="장소 검색" key="2">
           <StyledA>장소</StyledA>
-          <Search />
+          <Search
+            currentAvailable={currentAvailable}
+            disease={disease}
+            changeMarkerList={changeMarkerList}
+          />
           <SurgeryHours
             currentAvailable={currentAvailable}
             setCurrentAvailable={setCurrentAvailable}

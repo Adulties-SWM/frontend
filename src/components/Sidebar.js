@@ -8,6 +8,7 @@ export const Sidebar = ({
   setDisease,
   maxDistance,
   setMaxDistance,
+  changeMarkerList,
 }) => {
   return (
     <div style={{ height: '100vh' }}>
@@ -21,6 +22,7 @@ export const Sidebar = ({
           setDisease={setDisease}
           maxDistance={maxDistance}
           setMaxDistance={setMaxDistance}
+          changeMarkerList={changeMarkerList}
         />
       </div>
       <MedList />

@@ -38,8 +38,11 @@ function App() {
     },
   ]);
   useEffect(() => {
-    //console.log(markerList);
+    console.log(markerList);
   }, [markerList]);
+  const changeMarkerList = list => {
+    setMarkerList(list);
+  };
   return (
     <>
       <Layout>
@@ -51,6 +54,7 @@ function App() {
             setDisease={setDisease}
             maxDistance={maxDistance}
             setMaxDistance={setMaxDistance}
+            changeMarkerList={changeMarkerList}
           />
         </Sider>
         <Map markerList={markerList}></Map>
