@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import { Input } from 'antd';
 import styled from 'styled-components';
@@ -28,7 +28,7 @@ const SearchComponent = () => {
         placeholder="위치 입력"
         onSearch={onSearch}
         enterButton
-        style={{ width: '335px' }}
+        style={{ width: '357px' }}
       />
     </SearchWrap>
   );

@@ -1,13 +1,16 @@
+import React, { useState, useEffect } from 'react';
 import { MedInfoModal } from './components/MedInfoModal';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Sidebar } from './components/Sidebar';
-import Layout, { Content } from 'antd/lib/layout/layout';
+import Layout from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
-import React, { useEffect, useState } from 'react';
 import Map from './components/Map/Map';
 import './App.css';
 
 function App() {
+  const [currentAvailable, setCurrentAvailable] = useState('open');
+  const [disease, setDisease] = useState(null);
+  const [maxDistance, setMaxDistance] = useState(null);
   const [markerList, setMarkerList] = useState([
     {
       title: '카카오',
@@ -41,7 +44,14 @@ function App() {
     <>
       <Layout>
         <Sider style={{ background: '#ffffff' }} width={400}>
-          <Sidebar />
+          <Sidebar
+            currentAvailable={currentAvailable}
+            setCurrentAvailable={setCurrentAvailable}
+            disease={disease}
+            setDisease={setDisease}
+            maxDistance={maxDistance}
+            setMaxDistance={setMaxDistance}
+          />
         </Sider>
         <Map markerList={markerList}></Map>
       </Layout>
