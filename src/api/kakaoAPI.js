@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { config } from '../config/kakao';
-const url = 'http://dapi.kakao.com';
+const url = 'https://dapi.kakao.com';
 
 const getLocation = async address => {
   try {
