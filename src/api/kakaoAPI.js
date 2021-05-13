@@ -11,7 +11,6 @@ const getLocation = async address => {
       },
     );
     console.log('[SUCCESS] GET LOCATION', data);
-    console.log(data.documents);
     return data.documents;
   } catch (e) {
     console.error('[FAIL] GET LOCATION', e);

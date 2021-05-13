@@ -33,6 +33,10 @@ const StyledA = styled.a`
   font-size: 16px;
   font-weight: 700;
 `;
+const FirstBox = styled.div`
+  display: flex;
+  margin-bottom: 7px;
+`;
 const Tab = ({
   currentAvailable,
   setCurrentAvailable,
@@ -54,26 +58,30 @@ const Tab = ({
         tabBarStyle={{ color: '#ffffff' }}
       >
         <TabPane tab="현재 위치" key="1">
+          <FirstBox>
+            <SurgeryHours
+              currentAvailable={currentAvailable}
+              setCurrentAvailable={setCurrentAvailable}
+            />
+            <PatientState disease={disease} setDisease={setDisease} />
+          </FirstBox>
           <StyledA>거리</StyledA>
           <Distance maxDistance={maxDistance} setMaxDistance={setMaxDistance} />
-          <SurgeryHours
-            currentAvailable={currentAvailable}
-            setCurrentAvailable={setCurrentAvailable}
-          />
-          <PatientState disease={disease} setDisease={setDisease} />
         </TabPane>
         <TabPane tab="장소 검색" key="2">
+          <FirstBox>
+            <SurgeryHours
+              currentAvailable={currentAvailable}
+              setCurrentAvailable={setCurrentAvailable}
+            />
+            <PatientState disease={disease} setDisease={setDisease} />
+          </FirstBox>
           <StyledA>장소</StyledA>
           <Search
             currentAvailable={currentAvailable}
             disease={disease}
             changeMarkerList={changeMarkerList}
           />
-          <SurgeryHours
-            currentAvailable={currentAvailable}
-            setCurrentAvailable={setCurrentAvailable}
-          />
-          <PatientState disease={disease} setDisease={setDisease} />
         </TabPane>
       </StyledTab>
     </TabWrap>
