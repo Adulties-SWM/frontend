@@ -28,7 +28,7 @@ const SearchComponent = () => {
         placeholder="위치 입력"
         onSearch={onSearch}
         enterButton
-        style={{ width: '335px' }}
+        style={{ width: '357px' }}
       />
     </SearchWrap>
   );

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Select } from 'antd';
 const { Option } = Select;
 const StyledSelect = styled(Select)`
-  width: 150px;
+  width: 170px;
 `;
 const StyledDiv = styled.div`
   color: #ffffff;
