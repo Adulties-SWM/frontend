@@ -15,14 +15,13 @@ export const getSigungu = async params => {
     return e;
   }
 };
-export const getDetail = async (hpid) => {
+export const getDetail = async hpid => {
   try {
-    const { data } = await axios.get(`${url}/detail?hpid=${hpid})`);
-    console.log('[SUCCESS] GET SIGUNGU', data);
-    return data.documents[0].address_name;
+    const { data } = await axios.get(`${url}/detail?hpid=${hpid}`);
+    console.log('[SUCCESS] GET DETAIL', data);
+    return data;
   } catch (e) {
-    console.log("여기오는거야?", e);
-    console.error('[FAIL] GET SIGUNGU', e);
+    console.error('[FAIL] GET DETAIL', e);
     return e;
   }
 };
