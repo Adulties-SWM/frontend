@@ -54,10 +54,10 @@ const SearchComponent = ({ currentAvailable, disease, changeMarkerList }) => {
         onSearch={onChangeHandle}
       >
         <Input.Search
-          onClick={onSearch}
           size="large"
           placeholder="지역 입력"
           enterButton
+          onClick={onSearch}
         />
       </AutoComplete>
     </SearchWrap>
