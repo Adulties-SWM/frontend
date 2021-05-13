@@ -42,7 +42,8 @@ function App() {
   const [medicals, setMedicals] = useState([]);
   const changeMarkerList = list => {
     setMarkerList(list);
-    console.log(list);
+    setMedicals(list);
+    //console.log(list);
   };
   useEffect(() => {
     if (currentTab != 1) return;

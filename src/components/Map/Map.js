@@ -50,7 +50,7 @@ const Map = ({ markerList }) => {
           position.coords.latitude || 33.450705,
           position.coords.longitude || 126.570677,
         ),
-        level: 3,
+        level: 5,
       };
       const map = new window.kakao.maps.Map(mapContainer, mapOptions);
       setMap(map);
@@ -63,11 +63,16 @@ const Map = ({ markerList }) => {
   }, []);
 
   useEffect(() => {
+    //console.log(markerList);
     if (!map) return;
     if (usedMarkers && usedMarkers.length > 0) {
-      usedMarkers.forEach(m => m.setMap(null));
+      usedMarkers.forEach(m => {
+        m.setMap(null);
+      });
     }
+    console.log(markerList);
     const newUsedMarkers = markerList.map(_marker => {
+      //console.log(_marker.name);
       const position = new kakao.maps.LatLng(_marker.lat, _marker.lon);
       const marker = new kakao.maps.Marker({ map, position });
       marker.hpid = _marker.hpid;
@@ -77,7 +82,11 @@ const Map = ({ markerList }) => {
       });
       return marker;
     });
+    //console.log(usedMarkers);
     setUsedMarkers(newUsedMarkers);
+    console.log(newUsedMarkers);
+    //console.log(usedMarkers);
+
     /*
     positions.forEach((position, i) => {
       const gapX = MARKER_WIDTH + SPRITE_GAP;
