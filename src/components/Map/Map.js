@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import styled, { css } from "styled-components";
+import React, { useEffect, useState, useRef } from 'react';
+import styled, { css } from 'styled-components';
+import { MedInfoModal } from '../MedInfoModal';
 
 /* market 정적 데이터 */
 var MARKER_WIDTH = 33, // 기본, 클릭 마커의 너비
@@ -11,7 +12,7 @@ var MARKER_WIDTH = 33, // 기본, 클릭 마커의 너비
   OVER_OFFSET_X = 13, // 오버 마커의 기준 X좌표
   OVER_OFFSET_Y = OVER_MARKER_HEIGHT, // 오버 마커의 기준 Y좌표
   SPRITE_MARKER_URL =
-    "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markers_sprites2.png", // 스프라이트 마커 이미지 URL
+    'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markers_sprites2.png', // 스프라이트 마커 이미지 URL
   SPRITE_WIDTH = 126, // 스프라이트 이미지 너비
   SPRITE_HEIGHT = 146, // 스프라이트 이미지 높이
   SPRITE_GAP = 10; // 스프라이트 이미지에서 마커간 간격
@@ -24,6 +25,7 @@ var markerSize = new kakao.maps.Size(MARKER_WIDTH, MARKER_HEIGHT), // 기본, �
 
 /* global kakao */
 const Map = ({ markerList }) => {
+  const [modalStatus, setModalStatus] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [mapCenter, setMapCenter] = useState({
     lat: 33.450701, // 카카오 주소
@@ -38,7 +40,7 @@ const Map = ({ markerList }) => {
         offset: offset, // 마커 이미지에서의 기준 좌표
         spriteOrigin: spriteOrigin, // 스트라이프 이미지 중 사용할 영역의 좌상단 좌표
         spriteSize: spriteImageSize, // 스프라이트 이미지의 크기
-      }
+      },
     );
     return markerImage;
   }
@@ -46,10 +48,10 @@ const Map = ({ markerList }) => {
     var positions = [];
     for (var mark in markerList) {
       positions.push(
-        new kakao.maps.LatLng(markerList[mark].lat, markerList[mark].lon)
+        new kakao.maps.LatLng(markerList[mark].lat, markerList[mark].lon),
       );
     }
-    let mapContainer = document.getElementById("map");
+    let mapContainer = document.getElementById('map');
     let mapOptions = {
       center: new kakao.maps.LatLng(mapCenter.lat, mapCenter.lon),
       level: 3,
@@ -71,18 +73,18 @@ const Map = ({ markerList }) => {
         normalOrigin,
         overOrigin,
         clickOrigin,
-        index
+        index,
       ) {
         // 기본 마커이미지, 오버 마커이미지, 클릭 마커이미지를 생성합니다
         var normalImage = createMarkerImage(
             markerSize,
             markerOffset,
-            normalOrigin
+            normalOrigin,
           ),
           overImage = createMarkerImage(
             overMarkerSize,
             overMarkerOffset,
-            overOrigin
+            overOrigin,
           ),
           clickImage = createMarkerImage(markerSize, markerOffset, clickOrigin);
 
@@ -98,7 +100,7 @@ const Map = ({ markerList }) => {
         marker.normalImage = normalImage;
 
         // 마커에 mouseover 이벤트를 등록합니다
-        kakao.maps.event.addListener(marker, "mouseover", function () {
+        kakao.maps.event.addListener(marker, 'mouseover', function () {
           // 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
           // 마커의 이미지를 오버 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
@@ -107,7 +109,7 @@ const Map = ({ markerList }) => {
         });
 
         // 마커에 mouseout 이벤트를 등록합니다
-        kakao.maps.event.addListener(marker, "mouseout", function () {
+        kakao.maps.event.addListener(marker, 'mouseout', function () {
           // 클릭된 마커가 없고, mouseout된 마커가 클릭된 마커가 아니면
           // 마커의 이미지를 기본 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
@@ -116,7 +118,7 @@ const Map = ({ markerList }) => {
         });
 
         // 마커에 click 이벤트를 등록합니다
-        kakao.maps.event.addListener(marker, "click", function () {
+        kakao.maps.event.addListener(marker, 'click', function () {
           // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
           // 마커의 이미지를 클릭 이미지로 변경합니다
           if (!selectedMarker || selectedMarker !== marker) {
@@ -130,6 +132,7 @@ const Map = ({ markerList }) => {
           }
           // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
           setSelectedMarker(marker);
+          setModalStatus(!modalStatus);
         });
       }
     }
@@ -138,9 +141,19 @@ const Map = ({ markerList }) => {
     if (selectedMarker != null) console.log(selectedMarker.tmpId);
     // 모달 호출
   }, [selectedMarker]);
+
+  const ModalToggle = () => {
+    setModalStatus(!modalStatus);
+  };
+
   return (
     <MapContainer>
       <MapWrapper id="map"></MapWrapper>
+      <MedInfoModal
+        ModalToggle={ModalToggle}
+        modalProps={{ visible: modalStatus }}
+        data={selectedMarker}
+      />
     </MapContainer>
   );
 };
@@ -150,6 +163,6 @@ const MapWrapper = styled.div`
 `;
 const MapContainer = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 `;
 export default Map;

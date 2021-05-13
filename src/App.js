@@ -43,10 +43,8 @@ function App() {
         <Sider style={{ background: '#ffffff' }} width={400}>
           <Sidebar />
         </Sider>
-        <Content>content map</Content>
+        <Map markerList={markerList}></Map>
       </Layout>
-      <Map markerList={markerList}></Map>
-      {/* <MedInfoModal modalProps={{ visible: false }} /> */}
     </>
   );
 }

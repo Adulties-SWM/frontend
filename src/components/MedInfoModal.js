@@ -6,7 +6,8 @@ import React from 'react';
 //TODO: get dataProps
 export const MedInfoModal = ({
   modalProps,
-  data: {
+  ModalToggle,
+  /*   data: {
     name,
     location,
     phone,
@@ -14,20 +15,21 @@ export const MedInfoModal = ({
     hospitalRoomAvailable,
     emergencyAvailable,
     schedule,
-  },
+  }, */
 }) => {
   return (
     <Modal
       {...modalProps}
+      onCancel={ModalToggle}
       title="응급의료기관 정보"
       okText={'확인'}
       footer={[
-        <Button key="back" type="primary">
+        <Button key="back" type="primary" onClick={ModalToggle}>
           확인
         </Button>,
       ]}
     >
-      <Row style={{ marginBottom: '12px' }}>
+      {/*  <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>기관명</Text>
         </Col>
@@ -71,7 +73,7 @@ export const MedInfoModal = ({
           월(8:30~15:00) , 화(8:30~15:00), 수(8:30~15:00), 목(8:30~15:00)
           금(8:30~15:00), 토(8:30~15:00), 일(8:30~15:00), 공휴일(8:30~15:00)
         </Col>
-      </Row>
+      </Row> */}
     </Modal>
   );
 };
