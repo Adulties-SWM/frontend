@@ -9,23 +9,22 @@ export const Sidebar = ({
   maxDistance,
   setMaxDistance,
   changeMarkerList,
+  medicals,
+  setCurrentTab,
 }) => {
   return (
-    <div style={{ height: '100vh' }}>
-      <div
-        style={{ width: '100%', height: '230px', backgroundColor: '#668AAB' }}
-      >
-        <Tab
-          currentAvailable={currentAvailable}
-          setCurrentAvailable={setCurrentAvailable}
-          disease={disease}
-          setDisease={setDisease}
-          maxDistance={maxDistance}
-          setMaxDistance={setMaxDistance}
-          changeMarkerList={changeMarkerList}
-        />
-      </div>
-      <MedList />
+    <div style={{ height: '100vh', maxHeight: '100vh' }}>
+      <Tab
+        setCurrentTab={setCurrentTab}
+        currentAvailable={currentAvailable}
+        setCurrentAvailable={setCurrentAvailable}
+        disease={disease}
+        setDisease={setDisease}
+        maxDistance={maxDistance}
+        setMaxDistance={setMaxDistance}
+        changeMarkerList={changeMarkerList}
+      />
+      <MedList medicals={medicals} />
     </div>
   );
 };

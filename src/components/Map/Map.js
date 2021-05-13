@@ -27,57 +27,60 @@ var markerSize = new kakao.maps.Size(MARKER_WIDTH, MARKER_HEIGHT), // 기본, �
 const Map = ({ markerList }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [mapCenter, setMapCenter] = useState({
-    lat: 33.450701, // 카카오 주소
-    lon: 126.570667,
-  });
   // MakrerImage 객체를 생성하여 반환하는 함수입니다
-  function createMarkerImage(markerSize, offset, spriteOrigin) {
-    var markerImage = new kakao.maps.MarkerImage(
-      SPRITE_MARKER_URL, // 스프라이트 마커 이미지 URL
-      markerSize, // 마커의 크기
-      {
-        offset: offset, // 마커 이미지에서의 기준 좌표
-        spriteOrigin: spriteOrigin, // 스트라이프 이미지 중 사용할 영역의 좌상단 좌표
-        spriteSize: spriteImageSize, // 스프라이트 이미지의 크기
-      },
-    );
-    return markerImage;
-  }
+  // function createMarkerImage(markerSize, offset, spriteOrigin) {
+  //   var markerImage = new kakao.maps.MarkerImage(
+  //     SPRITE_MARKER_URL, // 스프라이트 마커 이미지 URL
+  //     markerSize, // 마커의 크기
+  //     {
+  //       offset: offset, // 마커 이미지에서의 기준 좌표
+  //       spriteOrigin: spriteOrigin, // 스트라이프 이미지 중 사용할 영역의 좌상단 좌표
+  //       spriteSize: spriteImageSize, // 스프라이트 이미지의 크기
+  //     },
+  //   );
+  //   return markerImage;
+  // }
+  const [map, setMap] = useState(null);
   useEffect(() => {
-    var positions = [];
-    for (var mark in markerList) {
-      positions.push({
-        hpid: 1, //markerList[mark].hpid,
-        latlng: new kakao.maps.LatLng(
-          markerList[mark].lat,
-          markerList[mark].lon,
+    navigator.geolocation.getCurrentPosition(position => {
+      let mapContainer = document.getElementById('map');
+      let mapOptions = {
+        center: new kakao.maps.LatLng(
+          position.coords.latitude || 33.450705,
+          position.coords.longitude || 126.570677,
         ),
-      });
-    }
-    let mapContainer = document.getElementById('map');
-    let mapOptions = {
-      center: new kakao.maps.LatLng(markerList[0].lat, markerList[0].lon),
-      level: 3,
-    };
-    const map = new window.kakao.maps.Map(mapContainer, mapOptions);
-    const center = map.getCenter();
-    setTimeout(function () {
-      map.relayout();
-      map.setCenter(center);
-    }, 0);
-    // 지도 위에 마커를 표시합니다
-    for (var i = 0, len = positions.length; i < len; i++) {
-      var gapX = MARKER_WIDTH + SPRITE_GAP, // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
-        originY = (MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 기본, 클릭 마커로 사용할 Y좌표 값
-        overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i, // 스프라이트 이미지에서 오버 마커로 사용할 Y좌표 값
-        normalOrigin = new kakao.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
-        clickOrigin = new kakao.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
-        overOrigin = new kakao.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+        level: 3,
+      };
+      const map = new window.kakao.maps.Map(mapContainer, mapOptions);
+      setMap(map);
+      const center = map.getCenter();
+      setTimeout(function () {
+        map.relayout();
+        map.setCenter(center);
+      }, 0);
+    });
+  }, []);
 
-      // 마커를 생성하고 지도위에 표시합니다
-      addMarker(positions[i], normalOrigin, overOrigin, clickOrigin);
-      // 마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
+  useEffect(() => {
+    if (!map) return;
+    markerList.forEach(_marker => {
+      const position = new kakao.maps.LatLng(_marker.lat, _marker.lon);
+      const marker = new kakao.maps.Marker({ map, position });
+      marker.hpid = _marker.hpid;
+      // 마커에 click 이벤트를 등록합니다
+      kakao.maps.event.addListener(marker, 'click', function () {
+        setSelectedMarker(marker);
+      });
+    });
+    /*
+    positions.forEach((position, i) => {
+      const gapX = MARKER_WIDTH + SPRITE_GAP;
+      const originY = (MARKER_HEIGHT + SPRITE_GAP) * i;
+      const overOriginY = (OVER_MARKER_HEIGHT + SPRITE_GAP) * i;
+      const normalOrigin = new kakao.maps.Point(0, originY); // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
+      const clickOrigin = new kakao.maps.Point(gapX, originY); // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
+      const overOrigin = new kakao.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+      addMarker(positions[i], normalOrigin, overOrigin, clickOrigin, i);
       function addMarker(
         position,
         normalOrigin,
@@ -145,11 +148,15 @@ const Map = ({ markerList }) => {
           setModalStatus(!modalStatus);
         });
       }
-    }
-  }, [markerList]);
+    });
+    */
+  }, [map, markerList, modalStatus, selectedMarker]);
+
   useEffect(() => {
-    if (selectedMarker != null) console.log(selectedMarker.hpid);
+    if (!selectedMarker) return;
     // 모달 호출
+
+    setModalStatus(true);
   }, [selectedMarker]);
 
   const ModalToggle = useCallback(() => {
@@ -162,7 +169,7 @@ const Map = ({ markerList }) => {
       <MedInfoModal
         ModalToggle={ModalToggle}
         modalProps={{ visible: modalStatus }}
-        // data={selectedMarker}
+        selectedMarker={selectedMarker}
       />
     </MapContainer>
   );

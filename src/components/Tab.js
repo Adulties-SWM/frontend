@@ -13,7 +13,6 @@ const TabWrap = styled.div`
   height: 230px;
   padding: 5px 20px;
   background-color: #668aab;
-  float: left;
 `;
 const StyledTab = styled(Tabs)`
   .ant-tabs-nav-wrap .ant-tabs-nav-wrap {
@@ -42,8 +41,11 @@ const Tab = ({
   maxDistance,
   setMaxDistance,
   changeMarkerList,
+  setCurrentTab,
 }) => {
-  const handleChange = key => {};
+  const handleChange = key => {
+    setCurrentTab(key);
+  };
   return (
     <TabWrap>
       <StyledTab
