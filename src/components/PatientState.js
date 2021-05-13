@@ -25,7 +25,7 @@ const PatientState = () => {
       <StyledDiv>진단 항목</StyledDiv>
       <StyledSelect onChange={handleChange} placeholder={'진단 항목 선택'}>
         {list.map(item => (
-          <Option value={item}>{item}</Option>
+          <Option key={item} value={item}>{item}</Option>
         ))}
       </StyledSelect>
     </SurgeryHoursWrap>
