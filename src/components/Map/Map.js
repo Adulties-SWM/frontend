@@ -104,10 +104,10 @@ const Map = ({ markerList }) => {
           // 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
           var marker = new kakao.maps.Marker({
             map: map,
-            position: position,
+            position: position.latlng,
             image: normalImage,
           });
-          marker.tmpId = index; // 의료기관 식별자 넣어야 함
+          marker.hpid = position.hpid; // 의료기관 식별자 넣어야 함
 
           // 마커 객체에 마커아이디와 마커의 기본 이미지를 추가합니다
           marker.normalImage = normalImage;
@@ -152,7 +152,7 @@ const Map = ({ markerList }) => {
     });
   }, [markerList]);
   useEffect(() => {
-    if (selectedMarker != null) console.log(selectedMarker.tmpId);
+    if (selectedMarker != null) console.log(selectedMarker.hpid);
     // 모달 호출
   }, [selectedMarker]);
 
