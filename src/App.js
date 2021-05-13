@@ -12,6 +12,7 @@ function App() {
   const [currentTab, setCurrentTab] = useState('1');
   const [currentAvailable, setCurrentAvailable] = useState('open');
   const [disease, setDisease] = useState(null);
+  //const [sigungu, setSigungu] = useState(false);
   const [maxDistance, setMaxDistance] = useState(null);
   const [markerList, setMarkerList] = useState([
     {
@@ -43,7 +44,6 @@ function App() {
   const changeMarkerList = list => {
     setMarkerList(list);
     setMedicals(list);
-    //console.log(list);
   };
   useEffect(() => {
     if (currentTab != 1) return;
@@ -92,7 +92,7 @@ function App() {
             setCurrentTab={setCurrentTab}
           />
         </Sider>
-        <Map markerList={markerList}></Map>
+        <Map markerList={markerList} currentTab={currentTab}></Map>
       </Layout>
     </>
   );

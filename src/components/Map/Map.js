@@ -24,7 +24,7 @@ var markerSize = new kakao.maps.Size(MARKER_WIDTH, MARKER_HEIGHT), // 기본, �
   spriteImageSize = new kakao.maps.Size(SPRITE_WIDTH, SPRITE_HEIGHT); // 스프라이트 이미지의 크기
 
 /* global kakao */
-const Map = ({ markerList }) => {
+const Map = ({ markerList, currentTab }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [usedMarkers, setUsedMarkers] = useState([]);
@@ -50,7 +50,7 @@ const Map = ({ markerList }) => {
           position.coords.latitude || 33.450705,
           position.coords.longitude || 126.570677,
         ),
-        level: 5,
+        level: currentTab == '2' ? 5 : 4,
       };
       const map = new window.kakao.maps.Map(mapContainer, mapOptions);
       setMap(map);
@@ -63,30 +63,30 @@ const Map = ({ markerList }) => {
   }, []);
 
   useEffect(() => {
-    //console.log(markerList);
     if (!map) return;
     if (usedMarkers && usedMarkers.length > 0) {
       usedMarkers.forEach(m => {
         m.setMap(null);
       });
     }
+    // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+    var bounds = new kakao.maps.LatLngBounds();
     console.log(markerList);
     const newUsedMarkers = markerList.map(_marker => {
-      //console.log(_marker.name);
       const position = new kakao.maps.LatLng(_marker.lat, _marker.lon);
       const marker = new kakao.maps.Marker({ map, position });
       marker.hpid = _marker.hpid;
+      bounds.extend(position);
       // 마커에 click 이벤트를 등록합니다
       kakao.maps.event.addListener(marker, 'click', function () {
         setSelectedMarker(marker);
       });
       return marker;
     });
-    //console.log(usedMarkers);
-    setUsedMarkers(newUsedMarkers);
-    console.log(newUsedMarkers);
-    //console.log(usedMarkers);
+    console.log('currentTab = ' + currentTab);
+    if (currentTab === '2') map.setBounds(bounds);
 
+    setUsedMarkers(newUsedMarkers);
     /*
     positions.forEach((position, i) => {
       const gapX = MARKER_WIDTH + SPRITE_GAP;
