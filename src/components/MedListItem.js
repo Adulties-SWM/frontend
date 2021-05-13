@@ -12,19 +12,7 @@ export const MedListItem = ({ data: { name, dutytime, distance } }) => {
         paddingBottom: '12px',
       }}
     >
-      <Col
-        span={6}
-        style={{
-          display: 'flex',
-          width: '100%',
-          alignItems: 'center',
-        }}
-      >
-        <Title level={3} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-          A
-        </Title>
-      </Col>
-      <Col span={18}>
+      <Col span={23} offset={1}>
         <Text strong>{name}</Text>
         <br />
         {/* <Text strong>서울특별시 강남구 일원동50 (일원로81)</Text> */}

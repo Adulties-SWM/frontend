@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# 🏥 응급의료기관 조회 서비스
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 기획의도
+응급의료기관을 조회할 수 있는 서비스로, 응급의료기관을 찾는 환자 또는 구급대원이 사용할 수 있습니다. 현재 위치 기준 가까운 거리에 있는지, 해당 증상의 환자를 진료할 수 있는 병원인지, 남은 병상수는 몇 개인지 등을 조회할 수 있기 때문에 응급환자 수송 과정에서 빠르게 알맞는 병원을 찾을 수 있습니다. 
+## 기능
+- 필터링하여 원하는 조건의 병원을 조회할 수 있습니다.
+  - 현재 진료 가능 병원 조회
+  - 현재 위치 기준, n미터 이내에 위치한 병원 조회
+  - 해당 증상의 환자 진료가 가능한 병원 조회
+  - 00시 00구 내에 있는 병원 조회
+- 조건에 맞는 병원 조회
+  - 조건에 맞는 병원의 리스트를 조회
+  - 조건에 맞는 병원이 표기된 지도 조회
+- 병원 상세 조회
+  - 병원명
+  - 상세주소
+  - 전화번호
+  - 병상수
+  - 입원실 가용 여부
+  - 응급실 가용 여부
+  - 진료시간
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 화면구성
+## 팀원소개
