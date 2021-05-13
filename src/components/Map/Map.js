@@ -47,9 +47,13 @@ const Map = ({ markerList }) => {
   useEffect(() => {
     var positions = [];
     for (var mark in markerList) {
-      positions.push(
-        new kakao.maps.LatLng(markerList[mark].lat, markerList[mark].lon),
-      );
+      positions.push({
+        hpid: 1, //markerList[mark].hpid,
+        latlng: new kakao.maps.LatLng(
+          markerList[mark].lat,
+          markerList[mark].lon,
+        ),
+      });
     }
     let mapContainer = document.getElementById('map');
     let mapOptions = {
@@ -70,8 +74,9 @@ const Map = ({ markerList }) => {
         normalOrigin = new kakao.maps.Point(0, originY), // 스프라이트 이미지에서 기본 마커로 사용할 영역의 좌상단 좌표
         clickOrigin = new kakao.maps.Point(gapX, originY), // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
         overOrigin = new kakao.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
+
       // 마커를 생성하고 지도위에 표시합니다
-      addMarker(positions[i], normalOrigin, overOrigin, clickOrigin, i);
+      addMarker(positions[i], normalOrigin, overOrigin, clickOrigin);
       // 마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
       function addMarker(
         position,
@@ -96,10 +101,10 @@ const Map = ({ markerList }) => {
         // 마커를 생성하고 이미지는 기본 마커 이미지를 사용합니다
         var marker = new kakao.maps.Marker({
           map: map,
-          position: position,
+          position: position.latlng,
           image: normalImage,
         });
-        marker.tmpId = index; // 의료기관 식별자 넣어야 함
+        marker.hpid = position.hpid; // 의료기관 식별자 넣어야 함
 
         // 마커 객체에 마커아이디와 마커의 기본 이미지를 추가합니다
         marker.normalImage = normalImage;
@@ -143,7 +148,7 @@ const Map = ({ markerList }) => {
     }
   }, [markerList]);
   useEffect(() => {
-    if (selectedMarker != null) console.log(selectedMarker.tmpId);
+    if (selectedMarker != null) console.log(selectedMarker.hpid);
     // 모달 호출
   }, [selectedMarker]);
 
