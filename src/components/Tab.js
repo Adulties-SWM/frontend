@@ -41,8 +41,11 @@ const Tab = ({
   setDisease,
   maxDistance,
   setMaxDistance,
+  setCurrentTab,
 }) => {
-  const handleChange = key => {};
+  const handleChange = key => {
+    setCurrentTab(key);
+  };
   return (
     <TabWrap>
       <StyledTab

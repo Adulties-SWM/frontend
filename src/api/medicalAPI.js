@@ -1,10 +1,13 @@
 import axios from 'axios';
-const url = 'https://backend-exvxj.run.goorm.io/';
+const url = 'https://backend-exvxj.run.goorm.io';
+axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-const getSigungu = async (sido, sigungu) => {
+export const getSigungu = async params => {
   try {
     // sido / sigungu 정보 써서 서버로 쏘면 됨
-    const { data } = await axios.get(`${url}/info/city`);
+    const { data } = await axios.get(`${url}/info/city`, { params });
     console.log('[SUCCESS] GET SIGUNGU', data);
     return data.documents[0].address_name;
   } catch (e) {
@@ -12,7 +15,7 @@ const getSigungu = async (sido, sigungu) => {
     return e;
   }
 };
-const getDetail = async (hpid) => {
+export const getDetail = async (hpid) => {
   try {
     const { data } = await axios.get(`${url}/detail?hpid=${hpid})`);
     console.log('[SUCCESS] GET SIGUNGU', data);
@@ -23,4 +26,8 @@ const getDetail = async (hpid) => {
     return e;
   }
 };
-export { getSigungu, getDetail };
+
+export const getCurLocMedicals = async params => {
+  const { data } = await axios.get(`${url}/info/position`, { params });
+  return data;
+};
