@@ -1,20 +1,18 @@
 import { Button, Col, Row } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import Text from 'antd/lib/typography/Text';
-import React from 'react';
+import React, { useState } from 'react';
+import { getDetail } from '../api/medicalAPI';
 
 //TODO: get dataProps
-export const MedInfoModal = ({ modalProps, ModalToggle, data }) => {
-  console.log(data);
-  const {
-    name = '세브란스병원',
-    location = '서울특별시 강남구 일원동50 (일원로81)',
-    phone = '02-3410-2114',
-    bedNum = '1966',
-    hospitalRoomAvailable = true,
-    emergencyAvailable = true,
-    schedule = '',
-  } = {};
+export const MedInfoModal = ({ modalProps, ModalToggle, selectedMarker }) => {
+  const [data, setData] = useState(null);
+  if (modalProps.visible === true) {
+    (async () => {
+      const serverData = await getDetail('A1100011');
+      setData(serverData);
+    })();
+  }
   return (
     <Modal
       {...modalProps}
@@ -31,45 +29,44 @@ export const MedInfoModal = ({ modalProps, ModalToggle, data }) => {
         <Col span={6} offset={1}>
           <Text strong>기관명</Text>
         </Col>
-        <Col offset={2}>{name}</Col>
+        <Col offset={2}>{data?.name}</Col>
       </Row>
       <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>주소</Text>
         </Col>
-        <Col offset={2}>{location}</Col>
+        <Col offset={2}>{data?.address}</Col>
       </Row>
       <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>대표전화</Text>
         </Col>
-        <Col offset={2}>{phone}</Col>
+        <Col offset={2}>{data?.tel}</Col>
       </Row>
       <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>병상수</Text>
         </Col>
-        <Col offset={2}>{bedNum}</Col>
+        <Col offset={2}>{data?.beds}</Col>
       </Row>
       <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>입원실가용여부</Text>
         </Col>
-        <Col offset={2}>{hospitalRoomAvailable ? '가능' : '불가능'}</Col>
+        <Col offset={2}>{data?.availableRoom ? '가능' : '불가능'}</Col>
       </Row>
       <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>응급실가용여부</Text>
         </Col>
-        <Col offset={2}>{emergencyAvailable ? '가능' : '불가능'}</Col>
+        <Col offset={2}>{data?.availableBed ? '가능' : '불가능'}</Col>
       </Row>
       <Row style={{ marginBottom: '12px' }}>
         <Col span={6} offset={1}>
           <Text strong>진료시간</Text>
         </Col>
         <Col offset={2} span={15}>
-          월(8:30~15:00) , 화(8:30~15:00), 수(8:30~15:00), 목(8:30~15:00)
-          금(8:30~15:00), 토(8:30~15:00), 일(8:30~15:00), 공휴일(8:30~15:00)
+          {data?.dutytime}
         </Col>
       </Row>
     </Modal>

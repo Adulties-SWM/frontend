@@ -27,20 +27,19 @@ var markerSize = new kakao.maps.Size(MARKER_WIDTH, MARKER_HEIGHT), // 기본, �
 const Map = ({ markerList }) => {
   const [modalStatus, setModalStatus] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [hosData, setHosData] = useState(null);
   // MakrerImage 객체를 생성하여 반환하는 함수입니다
-  function createMarkerImage(markerSize, offset, spriteOrigin) {
-    var markerImage = new kakao.maps.MarkerImage(
-      SPRITE_MARKER_URL, // 스프라이트 마커 이미지 URL
-      markerSize, // 마커의 크기
-      {
-        offset: offset, // 마커 이미지에서의 기준 좌표
-        spriteOrigin: spriteOrigin, // 스트라이프 이미지 중 사용할 영역의 좌상단 좌표
-        spriteSize: spriteImageSize, // 스프라이트 이미지의 크기
-      },
-    );
-    return markerImage;
-  }
+  // function createMarkerImage(markerSize, offset, spriteOrigin) {
+  //   var markerImage = new kakao.maps.MarkerImage(
+  //     SPRITE_MARKER_URL, // 스프라이트 마커 이미지 URL
+  //     markerSize, // 마커의 크기
+  //     {
+  //       offset: offset, // 마커 이미지에서의 기준 좌표
+  //       spriteOrigin: spriteOrigin, // 스트라이프 이미지 중 사용할 영역의 좌상단 좌표
+  //       spriteSize: spriteImageSize, // 스프라이트 이미지의 크기
+  //     },
+  //   );
+  //   return markerImage;
+  // }
   const [map, setMap] = useState(null);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -157,7 +156,7 @@ const Map = ({ markerList }) => {
   useEffect(() => {
     if (!selectedMarker) return;
     // 모달 호출
-    setHosData(selectedMarker.hpid);
+
     setModalStatus(true);
   }, [selectedMarker]);
 
@@ -171,7 +170,7 @@ const Map = ({ markerList }) => {
       <MedInfoModal
         ModalToggle={ModalToggle}
         modalProps={{ visible: modalStatus }}
-        data={hosData}
+        selectedMarker={selectedMarker}
       />
     </MapContainer>
   );

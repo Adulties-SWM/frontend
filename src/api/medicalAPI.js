@@ -15,6 +15,16 @@ export const getSigungu = async params => {
     return e;
   }
 };
+export const getDetail = async hpid => {
+  try {
+    const { data } = await axios.get(`${url}/detail?hpid=${hpid}`);
+    console.log('[SUCCESS] GET DETAIL', data);
+    return data;
+  } catch (e) {
+    console.error('[FAIL] GET DETAIL', e);
+    return e;
+  }
+};
 
 export const getCurLocMedicals = async params => {
   try {
