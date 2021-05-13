@@ -1,24 +1,28 @@
 import { Button, Col, Row } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
 import Text from 'antd/lib/typography/Text';
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { getDetail } from '../api/medicalAPI';
 
-//TODO: get dataProps
 export const MedInfoModal = ({ modalProps, ModalToggle, selectedMarker }) => {
   const [data, setData] = useState(null);
-  if (modalProps.visible === true) {
-    (async () => {
-      const serverData = await getDetail('A1100011');
-      setData(serverData);
-    })();
-  }
+  const callAPI = useCallback(async () => {
+    const serverData = await getDetail(selectedMarker.hpid);
+    setData(serverData);
+  }, [modalProps]);
+
+  useEffect(() => {
+    if (modalProps.visible === true) {
+      callAPI();
+    }
+  }, [modalProps]);
   return (
     <Modal
       {...modalProps}
       onCancel={ModalToggle}
       title="응급의료기관 정보"
       okText={'확인'}
+      width={600}
       footer={[
         <Button key="back" type="primary" onClick={ModalToggle}>
           확인
