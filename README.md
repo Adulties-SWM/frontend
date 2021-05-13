@@ -29,6 +29,10 @@
 
 ## 화면구성
 
+<img src="https://github.com/Adulties-SWM/frontend/blob/main/public/mainPage.png">
+<img src="https://github.com/Adulties-SWM/frontend/blob/main/public/mainPage2.PNG">
+<img src="https://github.com/Adulties-SWM/frontend/blob/main/public/modal.PNG">
+
 ## 개발환경
 groom IDE환경에서 node.js, express, react로 개발했습니다. 
 - front-end 사용 라이브러리 
