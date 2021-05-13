@@ -53,10 +53,15 @@ const Map = ({ markerList }) => {
     }
     let mapContainer = document.getElementById('map');
     let mapOptions = {
-      center: new kakao.maps.LatLng(mapCenter.lat, mapCenter.lon),
+      center: new kakao.maps.LatLng(markerList[0].lat, markerList[0].lon),
       level: 3,
     };
     const map = new window.kakao.maps.Map(mapContainer, mapOptions);
+    const center = map.getCenter();
+    setTimeout(function () {
+      map.relayout();
+      map.setCenter(center);
+    }, 0);
     // 지도 위에 마커를 표시합니다
     for (var i = 0, len = positions.length; i < len; i++) {
       var gapX = MARKER_WIDTH + SPRITE_GAP, // 스프라이트 이미지에서 마커로 사용할 이미지 X좌표 간격 값
