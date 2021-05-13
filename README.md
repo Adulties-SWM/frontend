@@ -44,8 +44,8 @@ groom IDE환경에서 node.js, express, react로 개발했습니다.
     "styled-components": "^5.3.0",
     "web-vitals": "^1.0.1"
   ```
-## 실행 방법
-- front-end 실행 방법
+## 실행방법
+- front-end 실행방법
   ```
   $ yarn
   $ yarn start
