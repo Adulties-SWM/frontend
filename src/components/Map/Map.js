@@ -50,7 +50,7 @@ const Map = ({ markerList, currentTab }) => {
           position.coords.latitude || 33.450705,
           position.coords.longitude || 126.570677,
         ),
-        level: 9,
+        level: 7,
       };
       const map = new window.kakao.maps.Map(mapContainer, mapOptions);
       setMap(map);

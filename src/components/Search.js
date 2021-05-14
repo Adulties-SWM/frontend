@@ -40,10 +40,15 @@ const SearchComponent = ({ currentAvailable, disease, changeMarkerList }) => {
         const addressList = result_public[0].address_name.split(' ');
         if (addressList.length < 2) {
           // 올바르지 않은 주소 입력 --> 재입력 알람 보내기
+          alert('시/구 정보까지 입력해주세요');
         } else {
           // 올바른 주소 입력 --> 서버로 데이터 보내기
           const sido = addressList[0];
           const sigungu = addressList[1];
+          console.log(sido);
+          console.log(sigungu);
+          console.log(currentAvailable);
+          console.log(disease);
           const result_node = await getSigungu(
             sido,
             sigungu,
@@ -51,6 +56,7 @@ const SearchComponent = ({ currentAvailable, disease, changeMarkerList }) => {
             disease,
           );
           if (result_node.length > 0) changeMarkerList(result_node);
+          else if (result_node.length == 0) alert('검색 결과가 없습니다');
         }
       }
     }
