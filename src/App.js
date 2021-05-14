@@ -12,7 +12,6 @@ function App() {
   const [currentTab, setCurrentTab] = useState('1');
   const [currentAvailable, setCurrentAvailable] = useState('open');
   const [disease, setDisease] = useState(null);
-  //const [sigungu, setSigungu] = useState(false);
   const [maxDistance, setMaxDistance] = useState(null);
   const [markerList, setMarkerList] = useState([
     {
