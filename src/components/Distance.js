@@ -10,7 +10,7 @@ const DistanceWrap = styled.div`
   margin: 5px 0px;
 `;
 const Distance = ({ maxDistance, setMaxDistance }) => {
-  const options = [1, 2, 3, 4, 5, null];
+  const options = [1, 3, 5, 10, 20, null];
   const handleChange = value => {
     setMaxDistance(value*1000);
   };
