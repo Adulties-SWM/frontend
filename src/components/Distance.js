@@ -12,7 +12,7 @@ const DistanceWrap = styled.div`
 const Distance = ({ maxDistance, setMaxDistance }) => {
   const options = [1, 3, 5, 10, 20, null];
   const handleChange = value => {
-    setMaxDistance(value*1000);
+    setMaxDistance(value ? value * 1000 : null);
   };
   return (
     <DistanceWrap>
