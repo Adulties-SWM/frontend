@@ -10,16 +10,16 @@ const DistanceWrap = styled.div`
   margin: 5px 0px;
 `;
 const Distance = ({ maxDistance, setMaxDistance }) => {
-  const options = [300, 500, null];
+  const options = [1, 3, 5, 10, 20, null];
   const handleChange = value => {
-    setMaxDistance(value);
+    setMaxDistance(value ? value * 1000 : null);
   };
   return (
     <DistanceWrap>
       <StyledSelect onChange={handleChange} placeholder={'거리 선택'}>
         {options.map(item => (
           <Option key={item} value={item}>
-            {item ? `${item}m` : '제한없음'}
+            {item ? `${item}km` : '제한없음'}
           </Option>
         ))}
       </StyledSelect>

@@ -66,3 +66,7 @@ groom IDE환경에서 node.js, express, react로 개발했습니다.
   - 이선노 
 
 
+## backend repository
+```
+https://github.com/Adulties-SWM/backend
+```

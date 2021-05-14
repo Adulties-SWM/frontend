@@ -71,7 +71,7 @@ const Map = ({ markerList, currentTab }) => {
     }
     // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
     var bounds = new kakao.maps.LatLngBounds();
-    console.log(markerList);
+    // console.log(markerList);
     const newUsedMarkers = markerList.map(_marker => {
       const position = new kakao.maps.LatLng(_marker.lat, _marker.lon);
       const marker = new kakao.maps.Marker({ map, position });
@@ -83,7 +83,7 @@ const Map = ({ markerList, currentTab }) => {
       });
       return marker;
     });
-    console.log('currentTab = ' + currentTab);
+    // console.log('currentTab = ' + currentTab);
     if (currentTab === '2') map.setBounds(bounds);
 
     setUsedMarkers(newUsedMarkers);

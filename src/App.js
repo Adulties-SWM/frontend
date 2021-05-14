@@ -54,7 +54,6 @@ function App() {
         maxDistance,
         disease,
       }).then(({ hospitals }) => {
-        console.log(hospitals);
         hospitals = hospitals.sort((a, b) => a.distance - b.distance);
         setMedicals(hospitals);
         setMarkerList(
